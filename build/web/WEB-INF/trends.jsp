@@ -10,10 +10,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="CSS/style.css">
+        <title>Top 10 - Tweets</title>
     </head>
     <body>
-        <ol type="1">
+        <header>
+            <h1>Los 10 tweets mas usados.</h1>
+        </header>
+        <p>Si deseas ver un tweet en especifico has click sobre el.</p>
+        <ol id="Mundo" type="1">
             <%for(Trend trend : (Iterable<Trend>) request.getAttribute("trends")) {%>
             <li>
                 <a href="<%=trend.getURL()%>" target="_blank"><%=trend.getName()%></a>

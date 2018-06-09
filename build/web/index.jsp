@@ -11,10 +11,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="CSS/style.css">
+        <title>Paises del Mundo</title>
     </head>
     <body>
-        <ul>
+        <header>
+            <h1>Algunos paises del mundo.</h1>
+        </header>
+        <p>Para ver los tweets has click sobre el pais que desees.</p>
+        <ul id="Mundo">
             <%for (Place place : new Places()) {%>
             <li>
                 <a href="TopTrends?placeName=<%=place.getName()%>" target="_blank"><%=place.getName()%></a>

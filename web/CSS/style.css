@@ -1,0 +1,54 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 7/06/2018, 11:30:38 PM
+    Author     : Cesar Granados
+*/
+*{
+    margin: 0px;
+    padding: 0px;
+}
+header{
+    color: #fff;
+    border-bottom: 3px solid #fff;
+}
+header h1{
+    padding: 10px;
+}
+/*-----------*/
+body{
+   background: #5CA4F0;
+}
+/*-----------*/
+ul, ol{
+    list-style: none;
+}
+/*-----------*/
+p {
+    padding: 10px;
+    color:#fff;
+}
+/*-----------*/
+#Mundo li a{
+    display: block;
+    background: #B7BBC0;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 8px 10px;
+}
+/*-----------*/
+#Mundo li a:hover{
+    background: #2B81DC;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 10px;
+}
+/*-----------*/
+#Mundo > li{
+    float: left;
+    padding: 15px;
+}
