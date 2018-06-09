@@ -5,7 +5,7 @@
  */
 package Service;
 
-import Model.Countries;
+import Model.Places;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,19 +27,30 @@ public class TrendsService {
     private static final String ACCESS_TOKEN_SECRET = "YpXs9JmNPPf9kN2gbzFuAtnbpeg2KoQsLK8RuocAgBpSA";
     
     private Twitter twitter;
+    private String errorMessage;
 
     public TrendsService() {
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
+        twitter = getTwitter();
+        errorMessage = "";
+    }
+    
+    private Twitter getTwitter() {
+        return new TwitterFactory(
+                getConfigBuilder().build()
+        ).getInstance();
+    }
+    
+    private ConfigurationBuilder getConfigBuilder() {
+        return new ConfigurationBuilder()
+                .setDebugEnabled(true)
                 .setOAuthConsumerKey(CONSUMER_KEY)
                 .setOAuthConsumerSecret(CONSUMER_SECRET)
                 .setOAuthAccessToken(ACCESS_TOKEN)
                 .setOAuthAccessTokenSecret(ACCESS_TOKEN_SECRET);
-        twitter = new TwitterFactory(cb.build()).getInstance();
     }
     
     public List<Trend> getTopTrends(String placeName) {
-        return new Countries()
+        return new Places()
                 .parallelStream()
                 .filter(x -> x.getName().equals(placeName))
                 .map(x -> x.getId())
@@ -49,13 +60,22 @@ public class TrendsService {
                 .collect(Collectors.toList());
     }
     
-    public Trend[] getTrends(int placeId) {
+    private Trend[] getTrends(int placeId) {
         try {
-            return twitter
-                    .getPlaceTrends(placeId)
-                    .getTrends();
-        } catch (TwitterException ex) {
+            return tryGetTrends(placeId);
+        } catch(TwitterException ex) {
+            errorMessage = ex.getErrorMessage();
             return new Trend[0];
         }
+    }
+    
+    public Trend[] tryGetTrends(int placeId) throws TwitterException {
+        return twitter
+                    .getPlaceTrends(placeId)
+                    .getTrends();
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }

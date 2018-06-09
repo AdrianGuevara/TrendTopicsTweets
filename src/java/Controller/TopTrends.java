@@ -34,7 +34,9 @@ public class TopTrends extends HttpServlet {
         TrendsService myService = new TrendsService();
         String placeName = request.getParameter("placeName");
         List<Trend> trends = myService.getTopTrends(placeName);
+        String errorMessage = myService.getErrorMessage();
         request.setAttribute("trends", trends);
+        request.setAttribute("errorMessage", errorMessage);
         getServletContext()
                 .getRequestDispatcher("/WEB-INF/trends.jsp")
                 .forward(request, response);
